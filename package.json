@@ -1,0 +1,34 @@
+{
+  "name": "broker-cli",
+  "version": "0.1.0",
+  "description": "A package to publish and subscribe to different types of brokers.",
+  "main": "cli.js",
+  "bin": {
+    "broker": "./cli.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmvilas/broker-cli.git"
+  },
+  "keywords": [
+    "broker",
+    "kafka",
+    "amqp",
+    "mqtt",
+    "rabbitmq"
+  ],
+  "author": "Fran Mendez <fmvilas@gmail.com> (www.fmvilas.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/fmvilas/broker-cli/issues"
+  },
+  "homepage": "https://github.com/fmvilas/broker-cli#readme",
+  "dependencies": {
+    "commander": "^3.0.2",
+    "kafkajs": "^1.11.0"
+  }
+}
