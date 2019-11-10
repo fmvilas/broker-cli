@@ -26,7 +26,11 @@ const showErrorAndExit = err => {
 
 program
   .version(packageInfo.version)
-  .option('-h, --host <host>', 'host where to find the broker');
+  .option('-h, --host <host>', 'host where to find the broker')
+  .option('-u, --username <username>', 'username to connect to the broker')
+  .option('-p, --password <password>', 'password to connect to the broker')
+  .option('-a, --auth <auth>', 'authentication mechanism to connect to the broker')
+  ;
 
 program
   .command('publish <protocol> <topic> <message>')
@@ -46,9 +50,22 @@ if (!protocols[protocol]) showErrorAndExit(`Unsupported protocol: ${protocol}`);
 
 if (operation === 'publish') {
   const message = program.args[3];
-  protocols[protocol].publish({ host: program.host, channel, message });
+  protocols[protocol].publish({
+    host: program.host,
+    username: program.username,
+    password: program.password,
+    auth: program.auth,
+    channel,
+    message,
+  });
 } else if (operation === 'subscribe') {
-  protocols[protocol].subscribe({ host: program.host, channel });
+  protocols[protocol].subscribe({
+    host: program.host,
+    username: program.username,
+    password: program.password,
+    auth: program.auth,
+    channel,
+  });
 }
 
 process.on('unhandledRejection', showErrorAndExit);

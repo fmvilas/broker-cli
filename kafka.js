@@ -1,9 +1,17 @@
 const { Kafka } = require('kafkajs');
 
-module.exports.publish = async ({ host, channel, message }) => {
+module.exports.publish = async ({ host, username, password, auth, channel, message }) => {
   const client = new Kafka({
     brokers: [host],
     clientId: 'broker-cli',
+    ssl: {
+      rejectUnauthorized: true,
+    },
+    sasl: username && password && auth ? {
+      mechanism: auth,
+      username,
+      password,
+    } : undefined,
   });
   const producer = client.producer();
 
@@ -22,10 +30,18 @@ module.exports.publish = async ({ host, channel, message }) => {
   }
 };
 
-module.exports.subscribe = async ({ host, channel }) => {
+module.exports.subscribe = async ({ host, username, password, auth, channel }) => {
   const client = new Kafka({
     brokers: [host],
     clientId: 'broker-cli',
+    ssl: {
+      rejectUnauthorized: true,
+    },
+    sasl: username && password && auth ? {
+      mechanism: auth,
+      username,
+      password,
+    } : undefined,
   });
   const consumer = client.consumer({ groupId: 'broker-cli-group-id' });
   try {
