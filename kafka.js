@@ -4,9 +4,9 @@ module.exports.publish = async ({ host, username, password, auth, channel, messa
   const client = new Kafka({
     brokers: [host],
     clientId: 'broker-cli',
-    ssl: {
+    ssl: username && password && auth ? {
       rejectUnauthorized: true,
-    },
+    } : undefined,
     sasl: username && password && auth ? {
       mechanism: auth,
       username,
@@ -34,9 +34,9 @@ module.exports.subscribe = async ({ host, username, password, auth, channel }) =
   const client = new Kafka({
     brokers: [host],
     clientId: 'broker-cli',
-    ssl: {
+    ssl: username && password && auth ? {
       rejectUnauthorized: true,
-    },
+    } : undefined,
     sasl: username && password && auth ? {
       mechanism: auth,
       username,
