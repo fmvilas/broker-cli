@@ -1,6 +1,6 @@
 {
   "name": "broker-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A package to publish and subscribe to different types of brokers.",
   "main": "cli.js",
   "bin": {
